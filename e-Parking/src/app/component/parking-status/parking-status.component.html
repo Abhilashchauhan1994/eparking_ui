@@ -1,0 +1,68 @@
+<app-header></app-header>
+<!-- This example requires Tailwind CSS v2.0+ -->
+<div class="flex flex-col py-20 px-4">
+  <div class="relative text-gray-600 focus-within:text-gray-400">
+    <span class="absolute inset-y-0 left-0 flex items-center pl-2">
+      <button type="submit" class="p-1 focus:outline-none focus:shadow-outline">
+        <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" class="w-6 h-6"><path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+      </button>
+    </span>
+    <input type="text" class="py-2 text-sm text-white bg-gray-light rounded-md pl-10 focus:outline-none focus:bg-black focus:text-gray-darkest" placeholder="Search by Name, vehicle Number etc"[(ngModel)]="term">
+  </div>
+  <div>
+  </div>
+  <br />
+  <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
+    <div class="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
+      <div class="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
+        <table class="overflow-x-auto w-full bg-gray-dark">
+          <thead class="bg-blue-100 border-b border-gray-500">
+            <tr>
+              <th class="p-4 text-left text-sm font-medium text-white-linen">
+                Full Name
+              </th>
+              <th class="p-4 text-left text-sm font-medium text-white-linen">
+                Vehicle Type
+              </th>
+              <th class="p-4 text-left text-sm font-medium text-white-linen">
+                Vehicle Number
+              </th>
+              <th class="p-4 text-left text-sm font-medium text-white-linen">
+                Parking Start Date
+              </th>
+              <th class="p-4 text-left text-sm font-medium text-white-linen">
+                Parking End Date
+              </th>
+              <th class="p-4 text-left text-sm font-medium text-white-linen">
+                Parking Status
+              </th>
+              <th class="p-4 text-left text-sm font-medium text-white-linen">
+                Actions
+              </th>
+            </tr>
+          </thead>
+          <tbody class="text-gray-600 text-sm divide-y divide-gray-300">
+            <tr class="bg-white-linen font-medium text-sm divide-y divide-gray-200" *ngFor="let item of parkingResponse|filter:term" [ngStyle]="{'background-color':getcolor(item.parkingStatus)}">
+              <td class="p-4 whitespace-nowrap">{{item.firstName}}{{" "}}{{item.lastName}}</td>
+              <td class="p-4 whitespace-nowrap">{{item.vehicleName}}</td>
+              <td class="p-4 whitespace-nowrap">{{item.vehicleNumber}}</td>
+              <td class="p-4 whitespace-nowrap">{{item.parkingStartDate|date:"medium"}}</td>
+              <td class="p-4 whitespace-nowrap">{{item.parkingEndDate|date:"medium"}}</td>
+              <td class="p-4 whitespace-nowrap">{{item.parkingStatus}}</td>
+              <td class="p-4 whitespace-nowrap">
+                <div class="flex space-x-1">
+                  <button class="border-2 border-Red rounded-md p-1" (click)="reNewParking(item.userId)">
+                    Re-New Parking
+                  </button>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!--
+for charts we need ng2-charts-->
